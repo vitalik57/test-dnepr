@@ -8,7 +8,10 @@ const initialState = {
   centimeters: "",
   conventMetersValue: "",
   conventFootValue: "",
-  conventYardValue: ""
+  conventYardValue: "",
+  conventMilimitersValue: "",
+  conventCetemetersValue: "",
+  milimiters: ""
 };
 const Conventing = () => {
   const [state, setState] = useState(initialState);
@@ -105,25 +108,52 @@ const Conventing = () => {
   const conventCentemiters = () => {
     switch (measureOptions.measureOpion) {
       case "foot":
-        setState(prev => ({ ...prev, conventCetersValue: 0.3975 * centimeters }));
+        setState(prev => ({ ...prev, conventCetemetersValue: 0.32 * centimeters }));
         break;
       case "yard":
-        setState(prev => ({ ...prev, conventCetersValue: 39.75 * centimeters }));
+        setState(prev => ({ ...prev, conventCetemetersValue: 0.109 * centimeters }));
         break;
       case "centimeters":
-        setState(prev => ({ ...prev, conventCetersValue: 100 * centimeters }));
+        setState(prev => ({ ...prev, conventCetemetersValue: centimeters }));
         break;
       case "meters":
-        setState(prev => ({ ...prev, conventCetersValue: centimeters }));
+        setState(prev => ({ ...prev, conventCetemetersValue: centimeters * 0.01 }));
         break;
       case "kilometers":
-        setState(prev => ({ ...prev, conventCetersValue: centimeters * 0.001 }));
+        setState(prev => ({ ...prev, conventCetemetersValue: centimeters * 0.000001 }));
         break;
       case "milimeters":
-        setState(prev => ({ ...prev, conventCetersValue: centimeters * 1000 }));
+        setState(prev => ({ ...prev, conventCetemetersValue: centimeters * 10 }));
         break;
       case "Inch":
-        setState(prev => ({ ...prev, conventCetersValue: centimeters * 39.3 }));
+        setState(prev => ({ ...prev, conventCetemetersValue: centimeters * 0.393 }));
+        break;
+      default:
+        break;
+    }
+  };
+  const conventMiliemiters = () => {
+    switch (measureOptions.measureOpion) {
+      case "foot":
+        setState(prev => ({ ...prev, conventMilimitersValue: 0.32 * centimeters }));
+        break;
+      case "yard":
+        setState(prev => ({ ...prev, conventMilimitersValue: 0.109 * centimeters }));
+        break;
+      case "centimeters":
+        setState(prev => ({ ...prev, conventMilimitersValue: centimeters }));
+        break;
+      case "meters":
+        setState(prev => ({ ...prev, conventMilimitersValue: centimeters * 0.01 }));
+        break;
+      case "kilometers":
+        setState(prev => ({ ...prev, conventMilimitersValue: centimeters * 0.000001 }));
+        break;
+      case "milimeters":
+        setState(prev => ({ ...prev, conventMilimitersValue: centimeters * 10 }));
+        break;
+      case "Inch":
+        setState(prev => ({ ...prev, conventMilimitersValue: centimeters * 0.393 }));
         break;
       default:
         break;
@@ -141,7 +171,7 @@ const Conventing = () => {
       //   e.target.value;
       // }}
       >
-        <div className={styles.measure__input}>
+        {/* <div className={styles.measure__input}>
           <label htmlFor="">
             <h2>yard</h2> <input onChange={changeInput} name="yard" value={state.yard} type="number" />
             <button onClick={conventFoot}>convert Yard</button>
@@ -160,6 +190,29 @@ const Conventing = () => {
           </label>
         </div>{" "}
         <div>
+          <select value={state.measureOpion} onChange={measure} name="measure" id="measure">
+            <option>meters </option>
+            <option>centimeters</option>
+            <option>milimeters</option>
+            <option>kilometers</option>
+            <option>Inch</option>
+            <option>foot</option>
+            <option>yard</option>
+          </select>
+        </div> */}
+        <div>
+          <h2>Перетворити:</h2>
+          <select value={state.measureOpion} onChange={measure} name="measure" id="measure">
+            <option>meters </option>
+            <option>centimeters</option>
+            <option>milimeters</option>
+            <option>kilometers</option>
+            <option>Inch</option>
+            <option>foot</option>
+            <option>yard</option>
+          </select>
+          <input type="number" />
+          <span> В</span>
           <select value={state.measureOpion} onChange={measure} name="measure" id="measure">
             <option>meters </option>
             <option>centimeters</option>

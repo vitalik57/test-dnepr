@@ -1,51 +1,73 @@
 import React from "react";
 import { useState } from "react/cjs/react.development";
-import styles from "../../src/styles.module.css";
 const initialState = {
-  yard: "",
-  foot: "",
-  meters: "",
-  centimeters: "",
-  conventMetersValue: "",
-  conventFootValue: "",
-  conventYardValue: "",
-  conventMilimitersValue: "",
-  conventCetemetersValue: "",
-  milimiters: ""
+  inputValue: "",
+  conventValue: ""
 };
+const InitialMeasure = { measureOpion: "meters", measureValue: "meters" };
 const Conventing = () => {
   const [state, setState] = useState(initialState);
-  const [measureOptions, setmeasureOptions] = useState("");
+  const [measureOptions, setmeasureOptions] = useState(InitialMeasure);
   const measure = e => {
-    setmeasureOptions({ measureOpion: e.target.value });
+    const { name, value } = e.target;
+    setmeasureOptions(prev => ({ ...prev, [name]: value }));
   };
-  const meters = state.meters;
-  const foot = state.meters;
-  const yard = state.meters;
-  const centimeters = state.meters;
+  const changeInput = e => {
+    const { name, value } = e.target;
+    setState(prev => ({ ...prev, [name]: value }));
+  };
+
+  const inputValue = state.inputValue;
 
   const conventMeters = () => {
     switch (measureOptions.measureOpion) {
       case "foot":
-        setState(prev => ({ ...prev, conventMetersValue: 3.2 * meters }));
+        setState(prev => ({ ...prev, conventValue: 3.2 * inputValue + "ft" }));
         break;
       case "yard":
-        setState(prev => ({ ...prev, conventMetersValue: 1.09 * meters }));
+        setState(prev => ({ ...prev, conventValue: 1.09 * inputValue + "yd" }));
         break;
       case "centimeters":
-        setState(prev => ({ ...prev, conventMetersValue: 100 * meters }));
+        setState(prev => ({ ...prev, conventValue: 100 * inputValue + "cm" }));
         break;
       case "meters":
-        setState(prev => ({ ...prev, conventMetersValue: meters }));
+        setState(prev => ({ ...prev, conventValue: inputValue + "m" }));
         break;
       case "kilometers":
-        setState(prev => ({ ...prev, conventMetersValue: meters * 0.001 }));
+        setState(prev => ({ ...prev, conventValue: inputValue * 0.001 + "km" }));
         break;
       case "milimeters":
-        setState(prev => ({ ...prev, conventMetersValue: meters * 1000 }));
+        setState(prev => ({ ...prev, conventValue: inputValue * 1000 + "mm" }));
         break;
       case "Inch":
-        setState(prev => ({ ...prev, conventMetersValue: meters * 39.3 }));
+        setState(prev => ({ ...prev, conventValue: inputValue * 39.3 + "in" }));
+        break;
+      default:
+        break;
+    }
+  };
+  const conventKilometers = () => {
+    switch (measureOptions.measureOpion) {
+      case "foot":
+        setState(prev => ({ ...prev, conventValue: 3280.8 * inputValue + "ft" }));
+        break;
+      case "yard":
+        setState(prev => ({ ...prev, conventValue: 1093.61 * inputValue + "yd" }));
+        break;
+      case "centimeters":
+        setState(prev => ({ ...prev, conventValue: 100000 * inputValue + "cm" }));
+        break;
+      case "meters":
+        setState(prev => ({ ...prev, conventValue: inputValue * 1000 + "m" }));
+        break;
+      case "kilometers":
+        setState(prev => ({ ...prev, conventValue: inputValue + "km" }));
+        break;
+      case "milimeters":
+        setState(prev => ({ ...prev, conventValue: inputValue * 1000000 + "mm" }));
+        break;
+      case "Inch":
+        setState(prev => ({ ...prev, conventValue: inputValue * 39370.078 + "in" }));
         break;
       default:
         break;
@@ -54,25 +76,25 @@ const Conventing = () => {
   const conventFoot = () => {
     switch (measureOptions.measureOpion) {
       case "foot":
-        setState(prev => ({ ...prev, conventFootValue: foot }));
+        setState(prev => ({ ...prev, conventValue: inputValue + "ft" }));
         break;
       case "yard":
-        setState(prev => ({ ...prev, conventFootValue: 0.33 * foot }));
+        setState(prev => ({ ...prev, conventValue: 0.33 * inputValue + "yd" }));
         break;
       case "centimeters":
-        setState(prev => ({ ...prev, conventFootValue: 3048 * foot }));
+        setState(prev => ({ ...prev, conventValue: 3048 * inputValue + "cm" }));
         break;
       case "meters":
-        setState(prev => ({ ...prev, conventFootValue: foot * 0.3048 }));
+        setState(prev => ({ ...prev, conventValue: inputValue * 0.3048 + "m" }));
         break;
       case "kilometers":
-        setState(prev => ({ ...prev, conventFootValue: foot * 0.0003048 }));
+        setState(prev => ({ ...prev, conventValue: inputValue * 0.0003048 + "km" }));
         break;
       case "milimeters":
-        setState(prev => ({ ...prev, conventFootValue: foot * 3048000 }));
+        setState(prev => ({ ...prev, conventValue: inputValue * 3048000 + "mm" }));
         break;
       case "Inch":
-        setState(prev => ({ ...prev, conventFootValue: foot * 12 }));
+        setState(prev => ({ ...prev, conventValue: inputValue * 12 + "in" }));
         break;
       default:
         break;
@@ -81,25 +103,52 @@ const Conventing = () => {
   const conventYard = () => {
     switch (measureOptions.measureOpion) {
       case "foot":
-        setState(prev => ({ ...prev, conventYardValue: yard * 3 }));
+        setState(prev => ({ ...prev, conventValue: inputValue * 3 + "ft" }));
         break;
       case "yard":
-        setState(prev => ({ ...prev, conventYardValue: yard }));
+        setState(prev => ({ ...prev, conventValue: inputValue + "yd" }));
         break;
       case "centimeters":
-        setState(prev => ({ ...prev, conventYardValue: 9144 * yard }));
+        setState(prev => ({ ...prev, conventValue: 9144 * inputValue + "cm" }));
         break;
       case "meters":
-        setState(prev => ({ ...prev, conventYardValue: yard * 0.9144 }));
+        setState(prev => ({ ...prev, conventValue: inputValue * 0.9144 + "m" }));
         break;
       case "kilometers":
-        setState(prev => ({ ...prev, conventYardValue: yard * 0.0009144 }));
+        setState(prev => ({ ...prev, conventValue: inputValue * 0.0009144 + "km" }));
         break;
       case "milimeters":
-        setState(prev => ({ ...prev, conventYardValue: yard * 9144000 }));
+        setState(prev => ({ ...prev, conventValue: inputValue * 9144000 + "mm" }));
         break;
       case "Inch":
-        setState(prev => ({ ...prev, conventYardValue: yard * 36 }));
+        setState(prev => ({ ...prev, conventValue: inputValue * 36 + "in" }));
+        break;
+      default:
+        break;
+    }
+  };
+  const conventInch = () => {
+    switch (measureOptions.measureOpion) {
+      case "foot":
+        setState(prev => ({ ...prev, conventValue: inputValue * 0.083 + "ft" }));
+        break;
+      case "yard":
+        setState(prev => ({ ...prev, conventValue: inputValue * 0.0277 + "yd" }));
+        break;
+      case "centimeters":
+        setState(prev => ({ ...prev, conventValue: 2.54 * inputValue + "cm" }));
+        break;
+      case "meters":
+        setState(prev => ({ ...prev, conventValue: inputValue * 0.0254 + "m" }));
+        break;
+      case "kilometers":
+        setState(prev => ({ ...prev, conventValue: inputValue * 0.0000254 + "km" }));
+        break;
+      case "milimeters":
+        setState(prev => ({ ...prev, conventValue: inputValue * 25.4 + "mm" }));
+        break;
+      case "Inch":
+        setState(prev => ({ ...prev, conventValue: inputValue + "in" }));
         break;
       default:
         break;
@@ -108,25 +157,25 @@ const Conventing = () => {
   const conventCentemiters = () => {
     switch (measureOptions.measureOpion) {
       case "foot":
-        setState(prev => ({ ...prev, conventCetemetersValue: 0.32 * centimeters }));
+        setState(prev => ({ ...prev, conventValue: 0.32 * inputValue + "ft" }));
         break;
       case "yard":
-        setState(prev => ({ ...prev, conventCetemetersValue: 0.109 * centimeters }));
+        setState(prev => ({ ...prev, conventValue: 0.109 * inputValue + "yd" }));
         break;
       case "centimeters":
-        setState(prev => ({ ...prev, conventCetemetersValue: centimeters }));
+        setState(prev => ({ ...prev, conventValue: inputValue + "cm" }));
         break;
       case "meters":
-        setState(prev => ({ ...prev, conventCetemetersValue: centimeters * 0.01 }));
+        setState(prev => ({ ...prev, conventValue: inputValue * 0.01 + "m" }));
         break;
       case "kilometers":
-        setState(prev => ({ ...prev, conventCetemetersValue: centimeters * 0.000001 }));
+        setState(prev => ({ ...prev, conventValue: inputValue * 0.000001 + "km" }));
         break;
       case "milimeters":
-        setState(prev => ({ ...prev, conventCetemetersValue: centimeters * 10 }));
+        setState(prev => ({ ...prev, conventValue: inputValue * 10 + "mm" }));
         break;
       case "Inch":
-        setState(prev => ({ ...prev, conventCetemetersValue: centimeters * 0.393 }));
+        setState(prev => ({ ...prev, conventValue: inputValue * 0.393 + "in" }));
         break;
       default:
         break;
@@ -135,74 +184,63 @@ const Conventing = () => {
   const conventMiliemiters = () => {
     switch (measureOptions.measureOpion) {
       case "foot":
-        setState(prev => ({ ...prev, conventMilimitersValue: 0.32 * centimeters }));
+        setState(prev => ({ ...prev, conventValue: 0.32 * inputValue + "ft" }));
         break;
       case "yard":
-        setState(prev => ({ ...prev, conventMilimitersValue: 0.109 * centimeters }));
+        setState(prev => ({ ...prev, conventValue: 0.109 * inputValue + "yd" }));
         break;
       case "centimeters":
-        setState(prev => ({ ...prev, conventMilimitersValue: centimeters }));
+        setState(prev => ({ ...prev, conventValue: inputValue + "cm" }));
         break;
       case "meters":
-        setState(prev => ({ ...prev, conventMilimitersValue: centimeters * 0.01 }));
+        setState(prev => ({ ...prev, conventValue: inputValue * 0.01 + "m" }));
         break;
       case "kilometers":
-        setState(prev => ({ ...prev, conventMilimitersValue: centimeters * 0.000001 }));
+        setState(prev => ({ ...prev, conventValue: inputValue * 0.000001 + "km" }));
         break;
       case "milimeters":
-        setState(prev => ({ ...prev, conventMilimitersValue: centimeters * 10 }));
+        setState(prev => ({ ...prev, conventValue: inputValue * 10 + "mm" }));
         break;
       case "Inch":
-        setState(prev => ({ ...prev, conventMilimitersValue: centimeters * 0.393 }));
+        setState(prev => ({ ...prev, conventValue: inputValue * 0.393 + "in" }));
         break;
       default:
         break;
     }
   };
-  const changeInput = e => {
-    const { name, value } = e.target;
-    setState(prev => ({ ...prev, [name]: value }));
+  const conventAll = () => {
+    switch (measureOptions.measureValue) {
+      case "foot":
+        conventFoot();
+        break;
+      case "yard":
+        conventYard();
+        break;
+      case "centimeters":
+        conventCentemiters();
+        break;
+      case "meters":
+        conventMeters();
+        break;
+      case "kilometers":
+        conventKilometers();
+        break;
+      case "milimeters":
+        conventMiliemiters();
+        break;
+      case "Inch":
+        conventInch();
+        break;
+      default:
+        break;
+    }
   };
-
   return (
     <>
-      <div
-      // onChange={e => {
-      //   e.target.value;
-      // }}
-      >
-        {/* <div className={styles.measure__input}>
-          <label htmlFor="">
-            <h2>yard</h2> <input onChange={changeInput} name="yard" value={state.yard} type="number" />
-            <button onClick={conventFoot}>convert Yard</button>
-          </label>
-          <label htmlFor="">
-            <h2>foot</h2> <input onChange={changeInput} name="foot" value={state.foot} type="number" />
-            <button onClick={conventFoot}>convert Foot</button>
-          </label>
-          <label htmlFor="">
-            <h2>meters</h2> <input onChange={changeInput} name="meters" value={state.meters} type="number" />
-            <button onClick={conventMeters}>convert Meters</button>
-          </label>
-          <label htmlFor="">
-            <h2>centimeters</h2> <input onChange={changeInput} name="centimeters" value={state.centimeters} type="number" />
-            <button onClick={conventCentemiters}>Convent Centemiters</button>
-          </label>
-        </div>{" "}
-        <div>
-          <select value={state.measureOpion} onChange={measure} name="measure" id="measure">
-            <option>meters </option>
-            <option>centimeters</option>
-            <option>milimeters</option>
-            <option>kilometers</option>
-            <option>Inch</option>
-            <option>foot</option>
-            <option>yard</option>
-          </select>
-        </div> */}
-        <div>
+      <div>
+        <div className="container">
           <h2>Перетворити:</h2>
-          <select value={state.measureOpion} onChange={measure} name="measure" id="measure">
+          <select class="select-css" value={state.measureOpion} onChange={measure} name="measureValue" id="measure">
             <option>meters </option>
             <option>centimeters</option>
             <option>milimeters</option>
@@ -211,9 +249,8 @@ const Conventing = () => {
             <option>foot</option>
             <option>yard</option>
           </select>
-          <input type="number" />
-          <span> В</span>
-          <select value={state.measureOpion} onChange={measure} name="measure" id="measure">
+          <input type="number" name="inputValue" onChange={changeInput} />
+          <select class="select-css" value={state.measureOpion} onChange={measure} name="measureOpion" id="measure">
             <option>meters </option>
             <option>centimeters</option>
             <option>milimeters</option>
@@ -222,6 +259,8 @@ const Conventing = () => {
             <option>foot</option>
             <option>yard</option>
           </select>
+          <button onClick={conventAll}>convent</button>
+          <span className="covent__value">Conventing value:{state.conventValue}</span>
         </div>
       </div>
     </>

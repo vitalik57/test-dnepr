@@ -1,9 +1,15 @@
+import { AppStyled } from "./Components/AppStyled";
 import Conventing from "./Components/Conventing";
+import Filter from "./Components/Filter/Filter";
 
 function App() {
   return (
     <>
-      <Conventing />
+      <AppStyled>
+        {" "}
+        <Conventing />
+        <Filter />
+      </AppStyled>
     </>
   );
 }

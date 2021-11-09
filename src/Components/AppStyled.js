@@ -56,14 +56,9 @@ export const AppStyled = styled.div`
     -o-animation: none;
     animation: none;
   }
-  /* h2 {
-    margin: 0;
-    padding: 0;
+  .questionst {
+    padding-top: 40px;
   }
-  h2:hover {
-    text-shadow: -1px -1px #000, 0 1px 0 #444;
-    color: #1a1a1a;
-  } */
   button:hover {
     background-color: #aaaaaa;
     background-image: -webkit-linear-gradient(top, #ccc, #555);

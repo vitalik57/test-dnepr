@@ -1,6 +1,7 @@
 import { AppStyled } from "./Components/AppStyled";
 import Conventing from "./Components/Conventing";
 import Filter from "./Components/Filter/Filter";
+import Questions from "./Components/Questions";
 
 function App() {
   return (
@@ -9,6 +10,7 @@ function App() {
         {" "}
         <Conventing />
         <Filter />
+        <Questions />
       </AppStyled>
     </>
   );
